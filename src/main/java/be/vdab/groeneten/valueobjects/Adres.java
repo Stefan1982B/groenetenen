@@ -9,6 +9,8 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.SafeHtml;
 
+import be.vdab.groeneten.constraints.Postcode;
+
 @Embeddable
 public class Adres implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -19,7 +21,7 @@ public class Adres implements Serializable {
 	@SafeHtml
 	private String huisNr;
 	@NotNull
-	@Range(min = 1000, max = 9999)
+	@Postcode
 	private int postcode;
 	@NotBlank
 	@SafeHtml
