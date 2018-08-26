@@ -1,11 +1,14 @@
 <!doctype html>
 <html lang='nl' xmlns:th='http://www.thymeleaf.org'>
-<head th:replace="fragments::head(title='Groene tenen')"></head>
-
+<head>
+<meta charset='UTF-8'>
+<link rel='icon' th:href='@{/images/groenetenen.ico}'
+	type='image/x-icon'>
+<title>Groene tenen</title>
+<meta name='viewport' content='width=device-width,initial-scale=1'>
+<link rel='stylesheet' th:href='@{/css/groenetenen.css}'>
+</head>
 <body>
-<div th:if='${param.fout !=null}' th:text='${param.fout}' class='fout'></div>
-	<nav th:replace='fragments::menu'></nav>
-	
 	<h1>
 		Groene tenen, <span th:text='${begroeting}'></span>.
 	</h1>
