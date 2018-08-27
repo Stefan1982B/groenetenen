@@ -29,5 +29,7 @@
 			th:href='@{/werknemers(page=${pageNr-1},sort=${param.sort})}'></a> 
 		</span>
 	</p>
+	<p th:text='${page.hasNext()}'></p>
+	<<  < > >>
 </body>
 </html>

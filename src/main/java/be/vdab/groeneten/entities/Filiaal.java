@@ -6,7 +6,6 @@ import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Set;
 
-import javax.jws.soap.SOAPBinding.Style;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,15 +19,28 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import be.vdab.groeneten.adapters.LocalDateAdapter;
 import be.vdab.groeneten.valueobjects.Adres;
 
 @Entity
 @Table(name = "filialen")
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
+@JsonAutoDetect(fieldVisibility=Visibility.ANY)
 public class Filiaal implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -45,6 +57,7 @@ public class Filiaal implements Serializable {
 	private BigDecimal waardeGebouw;
 	@DateTimeFormat(style = "S-")
 	@NotNull
+	@XmlJavaTypeAdapter(value = LocalDateAdapter.class)
 	private LocalDate inGebruikName;
 	@Valid
 	@Embedded
@@ -53,6 +66,8 @@ public class Filiaal implements Serializable {
 	private long versie;
 	
 	@OneToMany(mappedBy = "filiaal")
+	@XmlTransient 
+	@JsonIgnore
 	private Set<Werknemer> werknemers;
 	
 	
